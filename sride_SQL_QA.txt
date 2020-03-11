@@ -1,0 +1,12 @@
+1. How many people came each day starting from 01-01-2017, make zero if there are none.
+
+--> select created_date, count(UserId) from df where created_date >= '2017-01-01' group by created_date
+
+2. What is the total cost of female user acquisition from campaign starting from CPR , FB , Play store for each City?
+
+--> select realcity, sum(cost_acq) from (select * from df where substr(campaign,1,3) = 'CPR' or substr(campaign,1,2) = 'FB' or substr(campaign,1,9) = 'Playstore')a
+                                    where gender = 'FEMALE' group by realcity
+
+3. Find top five months where cost of campaigns where highest.
+
+--> select month(createdAt), sum(cost_acq) from df1 group by month(createdAt) order by sum(cost_acq) desc limit 5
